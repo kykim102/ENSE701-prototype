@@ -6,12 +6,12 @@ const Navbar = () => {
     <nav className='navbar bg-dark'>
       <h1>
         <Link to='/'>
-          <i clssName='fas fa-code'></i> DevConnector
+          <i className='fas fa-code'></i> DevConnector
         </Link>
       </h1>
       <ul>
         <li>
-          <Link href='profiles.html'>Developers</Link>
+          <Link to='/profiles'>Developers</Link>
         </li>
         <li>
           <Link to='/register'>Register</Link>
