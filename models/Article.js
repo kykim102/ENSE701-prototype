@@ -12,7 +12,7 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
   },
   year: {
-    type: Date.year,
+    type: String,
   },
   eprint: {
     type: String,
@@ -33,7 +33,7 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
   },
   month: {
-    type: Date.month,
+    type: String,
   },
   annote: {
     type: String,
