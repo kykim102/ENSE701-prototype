@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 const Landing = () => {
   const [formData, setFormData] = useState({
     title: "",
+    textType: "",
   })
 
-  const { title } = formData;
+  const { title, textType } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("SUCCESS");
+    console.log(formData.title);
+    console.log(formData.textType);
   };
 
   return (
@@ -34,6 +36,17 @@ const Landing = () => {
           <p className='searchHead'> Search </p>
           <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
+              <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
+                <option value=" "> </option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="year">Year</option>
+                <option value="source">Source</option>
+                <option value="DOI">DOI</option>
+                <option value="number">Number</option>
+                <option value="volume">Volume</option>
+                <option value="pageNumbers">Page Numbers</option>
+              </select>
               <input 
               type='title'
               placeholder='Enter title here'
