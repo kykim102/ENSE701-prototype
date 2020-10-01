@@ -17,7 +17,7 @@ const Upload = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    
+
     const payload = {
       author: formData.author,
       title: formData.title,
@@ -36,11 +36,11 @@ const Upload = () => {
       .catch(() => {
         console.log('Internal server error');
       });
-  };
+
+    };  
 
   return (
     <Fragment>
-      {" "}
       <h1 className='large text-primary'>Upload document</h1>
       <p className='lead'>
         Please fill in the form
