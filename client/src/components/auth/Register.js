@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-//import axios from "axios";
+import axios from "axios";
 
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    user: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, username, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,27 +20,26 @@ const Register = () => {
     if (password !== password2) {
       console.log("Password do not match");
     } else {
-      console.log("SUCCESS");
-      // const newUser = {
-      //   name,
-      //   email,
-      //   password,
-      // };
+      const newUser = {
+        name,
+        username,
+        password,
+      };
 
-      // try {
-      //   const config = {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   };
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
 
-      //   const body = JSON.stringify(newUser);
+        const body = JSON.stringify(newUser);
 
-      //   const res = await axios.post("/api/users", body, config);
-      //   console.log(res.data);
-      // } catch (err) {
-      //   console.error(err.response.data);
-      // }
+        const res = await axios.post("/api/users", body, config);
+        console.log(res.data);
+      } catch (err) {
+        console.error(err.response.data);
+      }
     }
   };
 
@@ -64,10 +63,10 @@ const Register = () => {
         </div>
         <div className='form-group'>
           <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
+            type='text'
+            placeholder='Username'
+            name='username'
+            value={username}
             onChange={(e) => onChange(e)}
             required
           />

@@ -34,11 +34,10 @@ router.post( "/",
           .json({ errors: [{ msg: "Invalid user" }] });
       }
 
-      var isMatch;
-      if(user.password == password){
-        isMatch = true;
-      }else{
-        isMatch = false;
+      if(!(user.password == password)){
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid user" }] });
       }
 
       res.send("User registered");
