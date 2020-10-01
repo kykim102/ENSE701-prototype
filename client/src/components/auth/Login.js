@@ -7,7 +7,7 @@ const Login = () => {
     password: "",
   });
 
-  const { email, password } = formData;
+  const { username, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,10 +27,10 @@ const Login = () => {
       <form className='form' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group'>
           <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
+            type='text'
+            placeholder='Username'
+            name='username'
+            value={username}
             onChange={(e) => onChange(e)}
             required
           />
