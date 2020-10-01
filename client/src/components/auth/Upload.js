@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 const Upload = () => {
   const [formData, setFormData] = useState({
@@ -26,25 +26,22 @@ const Upload = () => {
     };
 
     axios({
-      url: '/api/posts/save',
-      method: 'POST',
+      url: "/api/posts/save",
+      method: "POST",
       data: payload,
     })
       .then(() => {
-        console.log('Data sent to server');
+        console.log("Data sent to server");
       })
       .catch(() => {
-        console.log('Internal server error');
+        console.log("Internal server error");
       });
-
-    };  
+  };
 
   return (
     <Fragment>
       <h1 className='large text-primary'>Upload document</h1>
-      <p className='lead'>
-        Please fill in the form
-      </p>
+      <p className='lead'>Please fill in the form</p>
       <form className='form' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group'>
           <p>Author</p>

@@ -7,22 +7,29 @@ const { route } = require("./users");
 // @route   GET api/posts
 // @desc    Test route
 // @access  Public
-router.post(
-  "/save",
-    async (req,res) => {
-    const data = req.body;
-    const newArticle = new Document(data);
+router.post("/save", async (req, res) => {
+  const data = req.body;
+  const newArticle = new Document(data);
 
-    newArticle.save((err) => {
-      if(err){
-        res.status(500).json({ msg: 'Sorry, internal server errors '});
-        return;
-      }
-      return res.json({
-        msg: 'Your data has been saved'
-      });
+  newArticle.save((err) => {
+    if (err) {
+      res.status(500).json({ msg: "Sorry, internal server errors " });
+      return;
+    }
+    return res.json({
+      msg: "Your data has been saved",
     });
-  }  
-);
+  });
+});
+
+router.get("/get", async (req, res) => {
+  try {
+    const article = await Document.find();
+    res.json(article);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

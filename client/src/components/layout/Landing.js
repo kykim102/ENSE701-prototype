@@ -4,26 +4,32 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   const [formData, setFormData] = useState({
+    author: "",
     title: "",
-    textType: "",
-    posts: [],
-  })
+    journal: "",
+    year: "",
+  });
 
   const { title } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    axios.get('/')
+
+    axios({
+      url: "/api/posts/get",
+      method: "GET",
+    })
       .then((res) => {
-        this.setState({ posts: formData });
-        console.log('Data has been recieved');
+        console.log(res);
+        console.log(res.data);
+        setFormData(res.data);
       })
       .catch(() => {
-        alert('Error retrieving data');
+        console.log("Internal server error");
       });
   };
 
@@ -31,7 +37,6 @@ const Landing = () => {
     <section className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
-
           <h1 className='x-large'>Hello SEER!</h1>
           <p className='lead'>Prototype by 2020 ENSE701 Sem2 Group 3</p>
           <div className='buttons'>
@@ -42,10 +47,10 @@ const Landing = () => {
               Login
             </Link>
 
-          <p className='searchHead'> Search </p>
-          <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
-            <div className='form-group'>
-              {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
+            <p className='searchHead'> Search </p>
+            <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
+              <div className='form-group'>
+                {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
                 <option value=" "> </option>
                 <option value="title">Title</option>
                 <option value="author">Author</option>
@@ -56,16 +61,29 @@ const Landing = () => {
                 <option value="volume">Volume</option>
                 <option value="pageNumbers">Page Numbers</option>
               </select> */}
-              <input 
-              type='title'
-              placeholder='Enter title here'
-              name='title'
-              value={title}
-              onChange={(e) => onChange(e)}
-              />
-              <input type='submit' className='btn btn-primary' value='Search' />
+                <input
+                  type='title'
+                  placeholder='Enter title here'
+                  name='title'
+                  value={title}
+                  onChange={(e) => onChange(e)}
+                />
+                <input
+                  type='submit'
+                  className='btn btn-primary'
+                  value='Search'
+                />
+              </div>
+            </form>
+          </div>
+          <div className='book'>
+            <h3>{formData.author}</h3>
+            <h2>{formData.title}</h2>
+
+            <div className='details'>
+              <p>{formData.journal}</p>
+              <p>{formData.year}</p>
             </div>
-          </form>
           </div>
         </div>
       </div>
