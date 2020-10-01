@@ -1,3 +1,4 @@
 {
   "mongoURI": "mongodb+srv://kyu123:kyu123@devconnector.opgxc.mongodb.net/DevConnector?retryWrites=true&w=majority"
+  , "jwtSecret": "mysecrettoken"
 }

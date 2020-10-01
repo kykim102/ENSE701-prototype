@@ -2,16 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 const Books = require('../../models/Books');
+const Proceedings = require('../../models/Proceedings');
+const Article = require('../../models/Article');
+const { profile_url } = require("gravatar");
 
-// @route   GET api/auth
-// @desc    Test route
+// @route   GET api/Books
+// @desc    Get all book details
 // @access  Public
-router.post("/", 
-async (req, res) => {
-
-    const newBook = new Books {
-    Title: Books.
-
-}});
+router.get('/', async (req, res) => {
+    try{
+        const Search = await Books.find().populate('Books', 
+        ['title', 'author', 'publisher', 'year', 'month']);
+        res.json(Search);
+    } catch(err){
+    console.error(err.message);
+    res.status(500).send('Book not found');
+    }
+});
 
 module.exports = router;
