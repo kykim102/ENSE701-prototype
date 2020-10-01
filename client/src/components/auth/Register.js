@@ -5,7 +5,7 @@ import axios from "axios";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
-    user: "",
+    username: "",
     password: "",
     password2: "",
   });
