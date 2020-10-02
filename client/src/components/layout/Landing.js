@@ -7,23 +7,24 @@ const Landing = () => {
     title: "",
     textType: "",
     posts: [],
-  })
+  });
 
-  const { title } = formData;
+  const { title, textType } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    axios.get('/')
+    axios
+      .get("/")
       .then((res) => {
         this.setState({ posts: formData });
-        console.log('Data has been recieved');
+        console.log("Data has been recieved");
       })
       .catch(() => {
-        alert('Error retrieving data');
+        alert("Error retrieving data");
       });
   };
 
@@ -31,7 +32,6 @@ const Landing = () => {
     <section className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
-
           <h1 className='x-large'>Hello SEER!</h1>
           <p className='lead'>Prototype by 2020 ENSE701 Sem2 Group 3</p>
           <div className='buttons'>
@@ -42,30 +42,39 @@ const Landing = () => {
               Login
             </Link>
 
-          <p className='searchHead'> Search </p>
-          <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
-            <div className='form-group'>
-              {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
-                <option value=" "> </option>
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="year">Year</option>
-                <option value="source">Source</option>
-                <option value="DOI">DOI</option>
-                <option value="number">Number</option>
-                <option value="volume">Volume</option>
-                <option value="pageNumbers">Page Numbers</option>
-              </select> */}
-              <input 
-              type='title'
-              placeholder='Enter title here'
-              name='title'
-              value={title}
-              onChange={(e) => onChange(e)}
-              />
-              <input type='submit' className='btn btn-primary' value='Search' />
-            </div>
-          </form>
+            <p className='searchHead'> Search </p>
+            <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
+              <div className='form-group'>
+                <select
+                  type='text'
+                  name='textType'
+                  value={textType}
+                  onChange={(e) => onChange(e)}
+                >
+                  <option value=' '> </option>
+                  <option value='title'>Title</option>
+                  <option value='author'>Author</option>
+                  <option value='year'>Year</option>
+                  <option value='source'>Source</option>
+                  <option value='DOI'>DOI</option>
+                  <option value='number'>Number</option>
+                  <option value='volume'>Volume</option>
+                  <option value='pageNumbers'>Page Numbers</option>
+                </select>
+                <input
+                  type='title'
+                  placeholder='Enter title here'
+                  name='title'
+                  value={title}
+                  onChange={(e) => onChange(e)}
+                />
+                <input
+                  type='submit'
+                  className='btn btn-primary'
+                  value='Search'
+                />
+              </div>
+            </form>
           </div>
         </div>
       </div>
