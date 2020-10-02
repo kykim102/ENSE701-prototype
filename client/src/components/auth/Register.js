@@ -19,6 +19,7 @@ const Register = () => {
     e.preventDefault();
     if (password !== password2) {
       console.log("Password do not match");
+      alert("Password do not match");
     } else {
       const newUser = {
         name,
@@ -37,8 +38,14 @@ const Register = () => {
 
         const res = await axios.post("/api/users", body, config);
         console.log(res.data);
+        // TODO Alert user when register is completed
+        // if (res) {
+        //   alert("Account has been created");
+        //   console.log(res.data);
+        // }
       } catch (err) {
         console.error(err.response.data);
+        alert("The username already exsits. Please use different username");
       }
     }
   };
