@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Landing = () => {
@@ -10,6 +10,8 @@ const Landing = () => {
     year: "",
   });
 
+  let [responseData, setResponseData] = React.useState("");
+
   const { title } = formData;
 
   const onChange = (e) =>
@@ -17,20 +19,35 @@ const Landing = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     axios({
       url: "/api/posts/get",
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
         console.log(res.data);
-        setFormData(res.data);
+        setResponseData(res.data);
+        console.log(res);
+        responseData = JSON.stringify(responseData);
+        responseData = JSON.parse(responseData);
+        console.log(responseData[0]);
+        console.log(responseData[1]);
       })
       .catch(() => {
         console.log("Internal server error");
       });
+  };
+  const displaySearch = (responseData) => {
+    return (
+      <div className='card'>
+        <div className='card-header'>{responseData[0].title}</div>
+        <div className='card-main'>
+          <div className='main-description'>{responseData[0].author}</div>
+          <div className='main-description'>{responseData[0].journal}</div>
+          <div className='main-description'>{responseData[0].year}</div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -75,14 +92,12 @@ const Landing = () => {
                 />
               </div>
             </form>
-          </div>
-          <div className='book'>
-            <h3>{formData.author}</h3>
-            <h2>{formData.title}</h2>
-
-            <div className='details'>
-              <p>{formData.journal}</p>
-              <p>{formData.year}</p>
+            <div>
+              {
+                <Fragment>
+                  {responseData ? displaySearch(responseData) : undefined}
+                </Fragment>
+              }
             </div>
           </div>
         </div>
