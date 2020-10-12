@@ -1,37 +1,66 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+
+// The homepage with searching Function
 
 const Landing = () => {
   const [formData, setFormData] = useState({
+    author: "",
     title: "",
-    textType: "",
-    posts: [],
-  })
+    journal: "",
+    year: "",
+  });
+
+  let [responseData, setResponseData] = React.useState("");
 
   const { title } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    axios.get('/')
+
+    axios({
+      url: "/api/posts/get",
+      method: "GET",
+    })
       .then((res) => {
-        this.setState({ posts: formData });
-        console.log('Data has been recieved');
+        console.log(res.data);
+        setResponseData(res.data);
+        console.log(res);
+        responseData = JSON.stringify(responseData);
+        responseData = JSON.parse(responseData);
+        console.log(responseData.value);
+        console.log(responseData[0]);
+        console.log(responseData[1]);
       })
       .catch(() => {
-        alert('Error retrieving data');
+        console.log("Internal server error");
       });
   };
+  
+  // Search Function that did not work to display all info
+  // const displaySearch = (responseData) => {
+  //     return (
+  //       <div className='card'>
+  //         <div className='card-header'>{responseData[0].title}</div>
+  //         <div className='card-main'>
+  //           <div className='main-description'>{responseData[0].author}</div>
+  //           <div className='main-description'>{responseData[0].journal}</div>
+  //           <div className='main-description'>{responseData[0].year}</div>
+  //         </div>
+  //       </div>
+  //     )
+  // };
+  // Below line need to be in Fragment to show data.
+  // {responseData ? displaySearch(responseData) : undefined}
 
   return (
     <section className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
-
           <h1 className='x-large'>Hello SEER!</h1>
           <p className='lead'>Prototype by 2020 ENSE701 Sem2 Group 3</p>
           <div className='buttons'>
@@ -42,10 +71,10 @@ const Landing = () => {
               Login
             </Link>
 
-          <p className='searchHead'> Search </p>
-          <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
-            <div className='form-group'>
-              {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
+            <p className='searchHead'> Search </p>
+            <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
+              <div className='form-group'>
+                {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
                 <option value=" "> </option>
                 <option value="title">Title</option>
                 <option value="author">Author</option>
@@ -56,16 +85,36 @@ const Landing = () => {
                 <option value="volume">Volume</option>
                 <option value="pageNumbers">Page Numbers</option>
               </select> */}
-              <input 
-              type='title'
-              placeholder='Enter title here'
-              name='title'
-              value={title}
-              onChange={(e) => onChange(e)}
-              />
-              <input type='submit' className='btn btn-primary' value='Search' />
+                <input
+                  type='title'
+                  placeholder='Enter title here'
+                  name='title'
+                  value={title}
+                  onChange={(e) => onChange(e)}
+                />
+                <input
+                  type='submit'
+                  className='btn btn-primary'
+                  value='Search'
+                />
+              </div>
+            </form>
+            <div>
+              {
+                <Fragment>
+                  {Object.keys(responseData).map((keyName, i) => (
+                    <div className='card' key={i}>
+                    <div className='card-header'>{responseData[i].title}</div>
+                    <div className='card-main'>
+                      <div className='main-description'>{responseData[i].author}</div>
+                      <div className='main-description'>{responseData[i].journal}</div>
+                      <div className='main-description'>{responseData[i].year}</div>
+                    </div>
+                    </div>
+                  ))} 
+                </Fragment>
+              }
             </div>
-          </form>
           </div>
         </div>
       </div>

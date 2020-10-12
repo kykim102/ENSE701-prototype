@@ -2,6 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// Register Page
+// formData is the frame of the input to the database
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
