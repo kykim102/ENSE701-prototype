@@ -7,6 +7,7 @@ const { route } = require("./users");
 // @route   GET api/posts
 // @desc    Test route
 // @access  Public
+// Router for data to save to the database
 router.post("/save", async (req, res) => {
   const data = req.body;
   const newArticle = new Document(data);
@@ -22,6 +23,8 @@ router.post("/save", async (req, res) => {
   });
 });
 
+
+// Router to get all document from database
 router.get("/get", async (req, res) => {
   try {
     const article = await Document.find();

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
+// The homepage with searching Function
+
 const Landing = () => {
   const [formData, setFormData] = useState({
     author: "",
@@ -30,6 +32,7 @@ const Landing = () => {
         console.log(res);
         responseData = JSON.stringify(responseData);
         responseData = JSON.parse(responseData);
+        console.log(responseData.value);
         console.log(responseData[0]);
         console.log(responseData[1]);
       })
@@ -37,18 +40,22 @@ const Landing = () => {
         console.log("Internal server error");
       });
   };
-  const displaySearch = (responseData) => {
-    return (
-      <div className='card'>
-        <div className='card-header'>{responseData[0].title}</div>
-        <div className='card-main'>
-          <div className='main-description'>{responseData[0].author}</div>
-          <div className='main-description'>{responseData[0].journal}</div>
-          <div className='main-description'>{responseData[0].year}</div>
-        </div>
-      </div>
-    );
-  };
+  
+  // Search Function that did not work to display all info
+  // const displaySearch = (responseData) => {
+  //     return (
+  //       <div className='card'>
+  //         <div className='card-header'>{responseData[0].title}</div>
+  //         <div className='card-main'>
+  //           <div className='main-description'>{responseData[0].author}</div>
+  //           <div className='main-description'>{responseData[0].journal}</div>
+  //           <div className='main-description'>{responseData[0].year}</div>
+  //         </div>
+  //       </div>
+  //     )
+  // };
+  // Below line need to be in Fragment to show data.
+  // {responseData ? displaySearch(responseData) : undefined}
 
   return (
     <section className='landing'>
@@ -95,7 +102,16 @@ const Landing = () => {
             <div>
               {
                 <Fragment>
-                  {responseData ? displaySearch(responseData) : undefined}
+                  {Object.keys(responseData).map((keyName, i) => (
+                    <div className='card' key={i}>
+                    <div className='card-header'>{responseData[i].title}</div>
+                    <div className='card-main'>
+                      <div className='main-description'>{responseData[i].author}</div>
+                      <div className='main-description'>{responseData[i].journal}</div>
+                      <div className='main-description'>{responseData[i].year}</div>
+                    </div>
+                    </div>
+                  ))} 
                 </Fragment>
               }
             </div>
