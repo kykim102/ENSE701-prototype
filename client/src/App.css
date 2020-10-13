@@ -264,8 +264,28 @@ img {
   border: 1px solid #ccc;
 }
 
+.searchForm input[type="keyWord"] {
+  display: inline;
+  width: 50%;
+  padding: 0.4rem;
+  margin-right: 2rem;
+  font-size: 1.05rem;
+  border: 1px solid #ccc;
+}
+
+.searchForm select[type="textType"] {
+  display: inline;
+  width: 15%;
+  padding: 0.4rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  border: 0.1px solid #ccc;
+}
+
 .searchForm input[type="submit"] {
   display: inline;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .form input[type="text"],

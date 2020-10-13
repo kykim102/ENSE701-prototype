@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   const [formData, setFormData] = useState({
-    author: "",
-    title: "",
-    journal: "",
-    year: "",
+    keyWord: "",
+    textType: "",
   });
 
   let [responseData, setResponseData] = React.useState("");
 
-  const { title } = formData;
+  const { keyWord, textType } = formData;
 
   // Method handling the input data in the text field
   const onChange = (e) =>
@@ -23,16 +21,15 @@ const Landing = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formData.textType);
+
     // Keyword field to send data to the router
     const payload = {
-      author: "",
-      title: formData.title,
-      journal: "",
-      year: "",
+      keyWord: formData.keyWord,
     };
 
     axios({
-      url: "/api/posts/get",
+      url: `/api/posts/get/${formData.textType}`,
       method: "GET",
       params: payload,
     })
@@ -47,22 +44,6 @@ const Landing = () => {
         console.log("Internal server error");
       });
   };
-  
-  // Search Function that did not work to display all info
-  // const displaySearch = (responseData) => {
-  //     return (
-  //       <div className='card'>
-  //         <div className='card-header'>{responseData[0].title}</div>
-  //         <div className='card-main'>
-  //           <div className='main-description'>{responseData[0].author}</div>
-  //           <div className='main-description'>{responseData[0].journal}</div>
-  //           <div className='main-description'>{responseData[0].year}</div>
-  //         </div>
-  //       </div>
-  //     )
-  // };
-  // Below line need to be in Fragment to show data.
-  // {responseData ? displaySearch(responseData) : undefined}
 
   return (
     <section className='landing'>
@@ -81,22 +62,22 @@ const Landing = () => {
             <p className='searchHead'> Search </p>
             <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
               <div className='form-group'>
-                {/* <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
-                <option value=" "> </option>
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="year">Year</option>
-                <option value="source">Source</option>
-                <option value="DOI">DOI</option>
-                <option value="number">Number</option>
-                <option value="volume">Volume</option>
-                <option value="pageNumbers">Page Numbers</option>
-              </select> */}
+                <select type='textType' name='textType' value={textType} onChange={(e) => onChange(e)}>
+                  <option value=" ">All</option>
+                  <option value="title">Title</option>
+                  <option value="author">Author</option>
+                  <option value="year">Year</option>
+                  {/* <option value="source">Source</option>
+                  <option value="DOI">DOI</option>
+                  <option value="number">Number</option>
+                  <option value="volume">Volume</option>
+                  <option value="pageNumbers">Page Numbers</option> */}
+                </select>
                 <input
-                  type='title'
-                  placeholder='Enter title here'
-                  name='title'
-                  value={title}
+                  type='keyWord'
+                  placeholder='Enter keyword here'
+                  name='keyWord'
+                  value={keyWord}
                   onChange={(e) => onChange(e)}
                 />
                 <input

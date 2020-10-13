@@ -25,17 +25,57 @@ router.post("/save", async (req, res) => {
 // Router to get all document from database
 router.get("/get", async (req, res) => {
   try {
-    //console.log(req.query);
+    // Find all articles from database if there is no entry to the search
+    var article = await Document.find();
+    res.json(article);
 
-    if(req.query.title === ""){
-      // Find all articles from database if there is no entry to the search
-      var article = await Document.find();
-    } else {
-      // Find specific titled data from database
-      var article = await Document.find({title: req.query.title});
-    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
-    //console.log(article);
+// Router to get document using title keyword
+router.get("/get/title", async (req, res) => {
+  try {
+    var article = await Document.find({title: req.query.keyWord});
+
+    res.json(article);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Router to get document using author keyword
+router.get("/get/author", async (req, res) => {
+  try {
+    var article = await Document.find({author: req.query.keyWord});
+
+    res.json(article);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Router to get document using journal keyword
+router.get("/get/journal", async (req, res) => {
+  try {
+    var article = await Document.find({journal: req.query.keyWord});
+
+    res.json(article);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Router to get document using year keyword
+router.get("/get/year", async (req, res) => {
+  try {
+    var article = await Document.find({year: req.query.keyWord});
+
     res.json(article);
   } catch (err) {
     console.error(err.message);
