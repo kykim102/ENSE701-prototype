@@ -16,15 +16,25 @@ const Landing = () => {
 
   const { title } = formData;
 
+  // Method handling the input data in the text field
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // Keyword field to send data to the router
+    const payload = {
+      author: "",
+      title: formData.title,
+      journal: "",
+      year: "",
+    };
+
     axios({
       url: "/api/posts/get",
       method: "GET",
+      params: payload,
     })
       .then((res) => {
         console.log(res.data);
@@ -32,9 +42,6 @@ const Landing = () => {
         console.log(res);
         responseData = JSON.stringify(responseData);
         responseData = JSON.parse(responseData);
-        console.log(responseData.value);
-        console.log(responseData[0]);
-        console.log(responseData[1]);
       })
       .catch(() => {
         console.log("Internal server error");

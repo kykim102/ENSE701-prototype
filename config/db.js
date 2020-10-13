@@ -18,4 +18,9 @@ const connectDB = async () => {
   }
 };
 
+/* Get the database */
+const getDB = ()=>{
+  return state.db;
+}
+
 module.exports = connectDB;
