@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const Document = require("../../models/Article");
-const { route } = require("./users");
-const db = require("../../config/db");
 
 // @route   GET api/posts
 // @desc    Test route
@@ -24,14 +22,20 @@ router.post("/save", async (req, res) => {
   });
 });
 
-
 // Router to get all document from database
 router.get("/get", async (req, res) => {
   try {
-    console.log(req.query);
-    // Find input data from database
-    const article = await Document.find({title: req.query.title});
-    console.log(article);
+    //console.log(req.query);
+
+    if(req.query.title === ""){
+      // Find all articles from database if there is no entry to the search
+      var article = await Document.find();
+    } else {
+      // Find specific titled data from database
+      var article = await Document.find({title: req.query.title});
+    }
+
+    //console.log(article);
     res.json(article);
   } catch (err) {
     console.error(err.message);
