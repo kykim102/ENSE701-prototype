@@ -92,6 +92,7 @@ const Landing = () => {
                 //Recieve data is converted to html and shown to clients
                 <Fragment>
                   {Object.keys(responseData).map((keyName, i) => (
+                  
                     <div className='card' key={i}>
                     <div className='card-header'>{responseData[i].title}</div>
                     <div className='card-main'>
@@ -100,7 +101,9 @@ const Landing = () => {
                       <div className='main-description'>{responseData[i].year}</div>
                     </div>
                     </div>
+
                   ))} 
+                 
                 </Fragment>
               }
             </div>
