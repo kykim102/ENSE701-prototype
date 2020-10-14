@@ -27,7 +27,7 @@ const Landing = () => {
     const payload = {
       keyWord: formData.keyWord,
     };
-
+    //Sends and retrieve data
     axios({
       url: `/api/posts/get/${formData.textType}`,
       method: "GET",
@@ -89,6 +89,7 @@ const Landing = () => {
             </form>
             <div>
               {
+                //Recieve data is converted to html and shown to clients
                 <Fragment>
                   {Object.keys(responseData).map((keyName, i) => (
                     <div className='card' key={i}>
