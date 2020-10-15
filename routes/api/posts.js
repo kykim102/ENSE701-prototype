@@ -31,26 +31,23 @@ router.get("/get", async (req, res) => {
       res.json(article);
     } 
     else{ 
-      // Trial and failure of keyword searching
-      // exists = false;
-      // for(const object in article){
-      //   console.log("here 1");
-      //   for(const property in object){
-      //     console.log("here 2");
-      //     console.log(object);
-      //     console.log(property);
-      //     if(object["title"] === req.query.keyWord){
-      //       console.log(property);
-      //       console.log('working');
-      //       exists = true;
-      //     }
-      //   }
-      // }
-      // console.log(exists);
-      res.json(article);
+      list = [];
+      article.map((item, index) => {
+        if(item.title.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+          list.push(item);  
+        } 
+        else if (item.author.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+          list.push(item); 
+        }
+        else if (item.year.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+          list.push(item); 
+        }
+        else if (item.journal.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+          list.push(item); 
+        }
+      });
+      res.json(list);
     }
-
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -60,9 +57,19 @@ router.get("/get", async (req, res) => {
 // Router to get document using title keyword
 router.get("/get/title", async (req, res) => {
   try {
-    var article = await Document.find({title: req.query.keyWord});
-
-    res.json(article);
+    var article = await Document.find();
+    if(req.query.keyWord === ""){
+      list = [];
+    } else {
+      list = [];
+        article.map((item, index) => {
+          if (item.title.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+            list.push(item); 
+          }
+        })
+      }
+      
+      res.json(list);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -72,9 +79,19 @@ router.get("/get/title", async (req, res) => {
 // Router to get document using author keyword
 router.get("/get/author", async (req, res) => {
   try {
-    var article = await Document.find({author: req.query.keyWord});
-
-    res.json(article);
+    var article = await Document.find();
+    if(req.query.keyWord === ""){
+      list = [];
+    } else {
+      list = [];
+        article.map((item, index) => {
+          if (item.author.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+            list.push(item); 
+          }
+        })
+      }
+      
+      res.json(list);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -84,9 +101,19 @@ router.get("/get/author", async (req, res) => {
 // Router to get document using journal keyword
 router.get("/get/journal", async (req, res) => {
   try {
-    var article = await Document.find({journal: req.query.keyWord});
-
-    res.json(article);
+    var article = await Document.find();
+    if(req.query.keyWord === ""){
+      list = [];
+    } else {
+      list = [];
+        article.map((item, index) => {
+          if (item.journal.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+            list.push(item); 
+          }
+        })
+      }
+      
+      res.json(list);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -96,9 +123,19 @@ router.get("/get/journal", async (req, res) => {
 // Router to get document using year keyword
 router.get("/get/year", async (req, res) => {
   try {
-    var article = await Document.find({year: req.query.keyWord});
-
-    res.json(article);
+    var article = await Document.find();
+    if(req.query.keyWord === ""){
+      list = [];
+    } else {
+      list = [];
+        article.map((item, index) => {
+          if (item.year.toLowerCase().includes(req.query.keyWord.toLowerCase())){
+            list.push(item); 
+          }
+        })
+      }
+      
+      res.json(list);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
