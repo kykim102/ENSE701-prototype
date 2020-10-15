@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const ArticleSchema = new mongoose.Schema({
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "id",
+  },
   author: {
     type: String,
   },
@@ -21,7 +25,7 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
   },
   eprintclass: {
-    type: String
+    type: String,
   },
   volume: {
     type: String,
@@ -37,7 +41,7 @@ const ArticleSchema = new mongoose.Schema({
   },
   annote: {
     type: String,
-  }
+  },
 });
 
 module.exports = Article = mongoose.model("article", ArticleSchema);

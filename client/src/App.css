@@ -63,7 +63,7 @@ img {
 }
 
 .searchHead {
-  font-size:1.5rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
   margin-top: 2rem;
 }
@@ -255,17 +255,37 @@ img {
   color: #888;
 }
 
-.searchForm input[type="title"]{
+.searchForm input[type="title"] {
   display: inline;
   width: 80%;
-  padding:0.4rem;
+  padding: 0.4rem;
   margin-right: 2rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
 }
 
-.searchForm input[type="submit"]{
+.searchForm input[type="keyWord"] {
   display: inline;
+  width: 50%;
+  padding: 0.4rem;
+  margin-right: 2rem;
+  font-size: 1.05rem;
+  border: 1px solid #ccc;
+}
+
+.searchForm select[type="textType"] {
+  display: inline;
+  width: 15%;
+  padding: 0.4rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  border: 0.1px solid #ccc;
+}
+
+.searchForm input[type="submit"] {
+  display: inline;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .form input[type="text"],
@@ -598,3 +618,72 @@ button {
     padding: 0.3rem 0.4rem;
   }
 }
+
+.row{
+  overflow: hidden; 
+  position: relative; 
+  width: 110%;
+  border: 1px solid #fffd85;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.card {
+  width:30%;
+  border: 1px solid #fffd85;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 2rem;
+  float:left; 
+  margin-left:1%;
+}
+
+
+.card-header {
+  color: #262625;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #fffd85;
+  background-color: #fcffed;
+  padding: 5px 10px;
+}
+
+/*
+.card-header:hover {
+  color: #000000;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #fffd85;
+  background-color: #fcffed;
+  padding: 5px 10px;
+}
+*/
+
+.card-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.main-description {
+  color: #f5f251;
+  font-size: 12px;
+  text-align: center;
+}
+
+/*
+.main-description:hover {
+  color: #ffffff;
+  font-size: 17px;
+  text-align: center;
+}
+*/
