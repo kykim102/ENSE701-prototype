@@ -27,7 +27,29 @@ router.get("/get", async (req, res) => {
   try {
     // Find all articles from database if there is no entry to the search
     var article = await Document.find();
-    res.json(article);
+    if(req.query.keyWord === ""){
+      res.json(article);
+    } 
+    else{ 
+      // Trial and failure of keyword searching
+      // exists = false;
+      // for(const object in article){
+      //   console.log("here 1");
+      //   for(const property in object){
+      //     console.log("here 2");
+      //     console.log(object);
+      //     console.log(property);
+      //     if(object["title"] === req.query.keyWord){
+      //       console.log(property);
+      //       console.log('working');
+      //       exists = true;
+      //     }
+      //   }
+      // }
+      // console.log(exists);
+      res.json(article);
+    }
+
 
   } catch (err) {
     console.error(err.message);

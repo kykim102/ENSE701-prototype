@@ -58,7 +58,6 @@ const Landing = () => {
             <Link to='/login' className='btn btn-light'>
               Login
             </Link>
-
             <p className='searchHead'> Search </p>
             <form className='searchForm' onSubmit={(e) => onSubmit(e)}>
               <div className='form-group'>
@@ -102,8 +101,7 @@ const Landing = () => {
                     </div>
                     </div>
 
-                  ))} 
-                 
+                  ))}  
                 </Fragment>
               }
             </div>
