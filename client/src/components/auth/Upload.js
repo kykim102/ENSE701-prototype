@@ -2,6 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// Upload page
+// Where formData is the frame of the saving data
+
 const Upload = () => {
   const [formData, setFormData] = useState({
     author: "",
@@ -25,6 +28,7 @@ const Upload = () => {
       year: formData.year,
     };
 
+    // This is the runtime function to save input data to database
     axios({
       url: "/api/posts/save",
       method: "POST",
@@ -32,7 +36,6 @@ const Upload = () => {
     })
       .then(() => {
         console.log("Data sent to server");
-        alert("Your document has been uploaded");
       })
       .catch(() => {
         console.log("Internal server error");
